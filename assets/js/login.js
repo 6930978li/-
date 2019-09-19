@@ -7,7 +7,11 @@ $(function(){
             data:$('form').serialize(),
             dataType:'json',
             success:function(res){
-                console.log(res)
+                console.log(res);
+                if(res.code==200){
+                    alert('登录成功');
+                    location.href='/admin'
+                }
             }
         })
     })
