@@ -1,5 +1,4 @@
 //路由  处理请求和分发的
-
 const express = require('express');
 const pagecontrollers = require('./controllers/03.pagecontrollers');
 const usersModel=require('./controllers/003.userscontrollers');
@@ -21,6 +20,7 @@ router.get('/', pagecontrollers.getIndexPage)
     .post('/login',usersModel.login)
     .get('/admin/nav-menus',pagecontrollers.getMenusPage)
     .get('/admin/slides',pagecontrollers.getSlidesPage)
+    .get('/loginOut',usersModel.loginOut)
 
 
 

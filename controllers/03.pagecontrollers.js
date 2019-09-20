@@ -20,8 +20,12 @@ module.exports = {
         res.render('admin/categories.ejs')
     },
     getAdminIndexPage(req, res) {
-        res.render('admin/index.ejs');
-
+        if(req.session.isLogin&&req.session.isLogin=='true'){
+            res.render('admin/index.ejs');
+        }
+        else{
+            res.redirect('/login')
+        }
     },
     getCommentsPage(req, res) {
         res.render('admin/comments.ejs');

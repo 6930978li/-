@@ -13,6 +13,7 @@ module.exports = {
             else {
                 if (data) {
                     if (data.password == obj.password) {
+                        req.session.isLogin='true',
                         res.json({
                             code: 200,
                             msg: '登录成功'
@@ -33,5 +34,14 @@ module.exports = {
                 }
             }
         })
+    },
+    loginOut(req,res){
+        req.session.isLogin=''
+        res.json({
+            code:200,
+            msg:''
+        })
+        
+
     }
 }
