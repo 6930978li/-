@@ -14,6 +14,7 @@ module.exports = {
                 if (data) {
                     if (data.password == obj.password) {
                         req.session.isLogin='true',
+                        req.session.currentUser = data,
                         res.json({
                             code: 200,
                             msg: '登录成功'
