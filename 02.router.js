@@ -27,11 +27,13 @@ router.get('/', pagecontrollers.getIndexPage)
     .get('/getPostList', postcontrollers.getPostList)
     .get('/getCateList', cateControllers.getCateList)
     .get('/getPostById',postcontrollers.getPostById)
+    .get('/delCateById',cateControllers.delCateById)
     
 
     .post('/uploadFile',uploadControllers.uploadFile)
     .post('/addPost',postcontrollers.addPost)
-
+    .post('/editPost',postcontrollers.editPost)
+    .post('/addCate',cateControllers.addCate)
 
 
 

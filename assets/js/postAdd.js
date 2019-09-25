@@ -10,7 +10,8 @@ $(function(){
         $.ajax({
             type:'post',
             url:'/uploadFile',
-            data:formdata,            processData:false, // 告诉ajax不要进行数据的处理，因为formdata已经进行处理了
+            data:formdata, 
+            processData:false, // 告诉ajax不要进行数据的处理，因为formdata已经进行处理了
             contentType:false, 
             dataType:'json',
             success:function(res){
@@ -26,7 +27,7 @@ $(function(){
         })
     })
     CKEDITOR.replace('content')  //富文本框的初始化 
-    let pa =itcast.getParms(location.search)
+    let pa = itcast.getParams(location.search)
     $('.btnAdd').on('click',function(){
         CKEDITOR.instances.content.updateElement()
         if(pa.id){
@@ -51,7 +52,7 @@ $(function(){
                     $('.alert-danger ').show()
                     setTimeout(() => {
                         location.href='/admin/posts'
-                    },3000);
+                    },2000);
                     
                 }
             }
@@ -75,5 +76,27 @@ $(function(){
             $('#category_id').html(html)
         }
     })
+    if(pa.id){
+        $.ajax({
+            type:'get',
+            url:'/getPostById',
+            data:{id:pa.id},
+            dataType:'json',
+            success:function(res){
+                $('#title').val(res.data.title)
+                $('#content').val(res.data.content)
+                $('#slug').val(res.data.slug)
+                $('#category_id').val(res.data.category_id)
+                $('#status').val(res.data.status)
+                $('.thumbnail').attr('src', '/uploads/' + res.data.feature).show()
+                // 存储隐藏域
+                $('[name="feature"]').val(res.data.feature)
+                // 时间:将之前的日期转换为指定的yyyy-MM-ddThh:mm格式
+                $('#created').val(res.data.created)
+                // id
+                $('[name="id"]').val(res.data.id)
+            }
+        })
+    }
     
 })

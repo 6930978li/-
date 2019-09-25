@@ -17,5 +17,41 @@ module.exports={
                 })
             }
         })
+    },
+    addCate(req,res){
+        let obj=req.body
+        cateModel.addCate(obj,(err)=>{
+            if(err){
+                res.json({
+                    code:200,
+                    msg:'新增分类失败'
+                })
+            }else{
+                res.json({
+                    code:200,
+                    msg:'新增分类成功',
+                })
+            }
+        })
+
+    },
+    delCateById(req,res){
+        let id=req.query.id
+        cateModel.delCateById(id,(err)=>{
+            if(err){
+                console.log(err);
+                
+                res.json({
+                    code:200,
+                    msg:'删除失败'
+                })
+            }else{
+                res.json({
+                    code:200,
+                    msg:'删除成功',
+                })
+            }
+
+        })
     }
 }

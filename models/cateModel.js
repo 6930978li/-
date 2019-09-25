@@ -18,5 +18,30 @@ module.exports={
                callback(null,result)
            }
         }
-        )}
+        )},
+   addCate(obj,callback){
+       let sql='insert into categories set ?'
+       connection.query(sql,obj,(err)=>{
+        if(err){
+            callback(err)
+        }
+        else{
+            callback(null)
+        }
+
+       })
+   },
+   delCateById(id,callback){
+   /*     let sql='delete from categories where id = '+id */
+   let sql='delete from categories where id = ?'
+       connection.query(sql,[id],(err)=>{
+        if(err){
+            callback(err)
+        }
+        else{
+            callback(null)
+        }
+
+       })
+   }   
 }

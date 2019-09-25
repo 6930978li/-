@@ -6,7 +6,7 @@ const connection = mysql.createConnection({
     user: 'root',
     password: 'root',
     database: 'albx',
-    dateStrings: true,
+    /* dateStrings: true, */
 });
 
 
@@ -77,5 +77,39 @@ module.exports = {
             }
         })
 
+    },
+    getPostById(id, callback) {
+        var sql = 'select * from posts where id=' + id
+        connection.query(sql,(err, results) => {
+            if (err) {
+                callback(err)
+            }
+            else {
+                callback(null, results[0])
+            }
+
+
+        })
+    },
+    editPost(obj,callback) {
+        console.log(obj);
+        
+        let sql = 'update posts set ? where id = ?'
+      
+      
+      
+        connection.query(sql, [obj,obj.id], (err) => {
+            if (err) {
+                console.log(err);
+                
+                callback(err)
+                
+            }
+            else {
+                callback(null)
+            }
+
+        })
     }
+
 }

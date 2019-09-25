@@ -1,5 +1,5 @@
 const postModel=require('../models/postModel');
-/* var moment=require('moment'); */
+var moment=require('moment');
 module.exports={
     getPostList(req,res){
         let query = req.query
@@ -50,12 +50,47 @@ module.exports={
 
         },
         //编辑文件
-        getPostById(req,res){
+    getPostById(req,res){
             let id=req.query.id
             postModel.getPostById(id,(err,data)=>{
-                
+                if(err){
+                    res.json({
+                        code:400,
+                        msg:'数据查询失败'
+                    })
+                }
+                else{
+                    data.created = moment(data.created).format('YYYY-MM-DDTHH:mm')
+                    res.json({
+                        code:200,
+                        msg:'数据查询成功',
+                        data
+                    })
+                }
+
             })
-        }
+    },
+    editPost(req,res){
+        let obj=req.body
+        console.log(obj);
+        
+        postModel.editPost(obj,(err)=>{
+            if(err){
+                res.json({
+                    code:400,
+                    msg:'编辑失败'
+                })
+            }
+            else{
+                
+                res.json({
+                    code:200,
+                    msg:'编辑成功'
+                })
+            }
+
+        })
+    }
 
     
     
